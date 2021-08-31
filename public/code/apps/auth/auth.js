@@ -36,7 +36,7 @@ class CreateAccountApp extends ClientApp {
 
 
         let confirm_label = new ElementBuilder('label')
-            .withInnerHtml('Password')
+            .withInnerHtml('Confirm Password')
         let confirm_input = new PasswordInputBuilder()
             .build()
         confirm_label.withChildElement(confirm_input)
@@ -48,6 +48,7 @@ class CreateAccountApp extends ClientApp {
         let back_button = new ButtonBuilder(() => {
             this.Stop()
         })
+            .withInnerHtml("Back")
 
         let start_button = new ButtonBuilder(() => {
             if (password_input.value !== confirm_input.value){
@@ -70,10 +71,12 @@ class CreateAccountApp extends ClientApp {
                     console_l.Error("Cannot connect to server. Account not created.")
                 })
         })
+            .withInnerHtml('Create')
 
         ele.withChildBuilder(username_label)
             .withChildBuilder(password_label)
-            .withChildBuilder(console_l)
+            .withChildBuilder(confirm_label)
+            .withChildElement(console_l.View)
             .withChildBuilder(new ElementBuilder()
                 .withRowFlexContainerCss()
                 .withChildBuilder(back_button)
@@ -120,6 +123,7 @@ class LoginApp extends ClientApp {
         let back_button = new ButtonBuilder(() => {
             this.Stop()
         })
+            .withInnerHtml('Back')
 
         let start_button = new ButtonBuilder(() => {
             post('/auth/login', {
@@ -137,10 +141,11 @@ class LoginApp extends ClientApp {
                     console_l.Error("Cannot connect to server")
                 })
         })
+            .withInnerHtml('Login')
 
         ele.withChildBuilder(username_label)
             .withChildBuilder(password_label)
-            .withChildBuilder(console_l)
+            .withChildElement(console_l.View)
             .withChildBuilder(new ElementBuilder()
                 .withRowFlexContainerCss()
                 .withChildBuilder(back_button)
@@ -169,18 +174,16 @@ class AuthApp extends ClientApp {
                 .withChildBuilder(new ElementBuilder('h1')
                     .withInnerHtml('Welcome to the Intranet'))
                 .withChildBuilder(new ElementBuilder()/*image goes here*/)
-                .withChildBuilder(new ButtonBuilder(() => {
-                    Login.Start()
-                })
-                    .withInnerHtml('Login'))
+
                 .withChildBuilder(new ButtonBuilder(() => {
                     Create.Start()
                 })
-                    .withInnerHtml('Create')))
-    }
-
-    OnEnd() {
-        this.View.remove()
+                    .withInnerHtml('Create'))
+                .withChildBuilder(new ButtonBuilder(() => {
+                    Login.Start()
+                })
+                .withInnerHtml('Login'))
+                .build())
     }
 }
 

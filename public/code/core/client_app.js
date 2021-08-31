@@ -22,7 +22,7 @@ export class ClientApp {
         if (!this.IsRunning){
             clientEngine.start_app(this.Name)
         } else {
-            throw new Error("Cannot start as the app is already running. Use the restart method if you'd like to reset the app.")
+            throw new Error(`Cannot start as the app is already running. Use the restart method if you'd like to reset the app. Current Running: ${clientEngine.ActiveApp.Name} Stack: ${clientEngine.AppStack}`)
         }
     }
 

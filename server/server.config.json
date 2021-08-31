@@ -1,5 +1,0 @@
-{
-  "port": 5999,
-  "logging": "tiny",
-  "static_dir": "public"
-}

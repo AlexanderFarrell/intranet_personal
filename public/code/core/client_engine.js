@@ -44,7 +44,7 @@ class ClientEngine {
 
     close_running_app(){
         if (this.AppStack.length > 1){
-            app_switcher.Switch(this.AppStack.length - 2)
+            app_switcher.Switch(this.AppStack[this.AppStack.length - 2])
             this.AppStack.pop()
         } else {
             console.error(`No more apps to close, as this is the last one.`)

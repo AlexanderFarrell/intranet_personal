@@ -1,11 +1,13 @@
-import {ClientApp} from "../../core/client_app";
+import {ClientApp} from "../../core/client_app.js";
 
-class Home extends ClientApp {
+class HomeApp extends ClientApp {
     constructor() {
         super("Home");
     }
 
     OnStart() {
-        SwapContents
+
     }
 }
+
+export let Home = new HomeApp()

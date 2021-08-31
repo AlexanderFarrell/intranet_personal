@@ -1,5 +1,5 @@
 import {ElementBuilder} from "./element_builder.js";
-import {BaseSwitcher} from "./base_switcher";
+import {BaseSwitcher} from "./base_switcher.js";
 
 
 

@@ -1,7 +1,9 @@
 const express = require('express')
 const path = require('path')
 const fs = require('fs')
+const bodyParser = require('body-parser')
 const morgan_logging = require('morgan')
+const {setup_database} = require("../apps/database");
 
 function load_config(path){
     try {
@@ -20,6 +22,7 @@ class ServerBuilder{
         this.app.use(express.static(config.static_dir))
         this.app.use(morgan_logging(config.logging))
         this.app.set('port', config.port)
+        this.app.use(bodyParser.json())
         this.app.Apps = this.Apps;
         console.log("Express App initialized")
 
@@ -30,10 +33,12 @@ class ServerBuilder{
 
     add_app(app_builder){
         this.Apps.set(app_builder.Name, app_builder)
+        app_builder.build(this.app)
+        return this;
     }
 
     add_database(){
-
+        setup_database(this.app, this.Config)
     }
 
     add_redis(){
@@ -53,6 +58,7 @@ class ServerBuilder{
             console.log('Server app running!')
             console.log(`  Listening on port ${this.app.get('port')}!\n   Visit http://localhost:${this.app.get('port')} to view locally!`)
         })
+        return this;
     }
 }
 
@@ -64,9 +70,9 @@ class AppBuilder {
         this.SetupOperations = []
     }
 
-    add_route(route){
+    add_route(url, route){
         this.add_setup_operation((app) => {
-            app.use(route)
+            app.use(url, route)
         }, `router: ${route.path}`)
     }
 
@@ -75,7 +81,7 @@ class AppBuilder {
     }
 
     add_setup_operation(op, name=null){
-        this.SetupOperations.append([op, name])
+        this.SetupOperations.push([op, name])
     }
 
     build(app) {

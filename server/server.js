@@ -1,4 +1,6 @@
 const {ServerBuilder} = require('./core/server_core')
+const {DebugApp} = require("./apps/debug/debug");
 
-new ServerBuilder()
-.build();
+const s = new ServerBuilder()
+    .add_app(new DebugApp())
+    .build()
