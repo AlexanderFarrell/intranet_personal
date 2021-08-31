@@ -9,6 +9,14 @@ export class TextInputBuilder extends ElementBuilder{
     }
 }
 
+export class TextAreaInputBuilder extends ElementBuilder{
+    constructor(placeholder = "") {
+        super('textarea');
+        this.withAttribute("placeholder", placeholder);
+        return this;
+    }
+}
+
 export class NumberInputBuilder extends ElementBuilder {
     constructor(step = 1, initialValue=0) {
         super('input')

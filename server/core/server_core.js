@@ -1,12 +1,12 @@
 const express = require('express')
 const fs = require('fs')
-const bodyParser = require('body-parser')
-const morgan_logging = require('morgan')
-const sessions = require('express-session')
+const path = require('path')
 
 get_express = express
 
-function load_config(path){
+let def_config_path= path.resolve(__dirname, '../server.config.json')
+
+function get_config(path=def_config_path){
     try {
         return JSON.parse(fs.readFileSync(path, 'utf8'));
     } catch (e) {
@@ -14,30 +14,15 @@ function load_config(path){
     }
 }
 
-function setup_express(app, config){
-    app.use(express.static(config.static_dir))
-    app.use(morgan_logging(config.logging))
-    app.use(bodyParser.json())
-    app.use(sessions({
-            secret: "!*HF*ngwufni",
-            resave: false,
-            saveUninitialized: false,
-            cookie: {
-                maxAge: 600000
-            }
-        }
-    ))
-}
-
 function listen(app, config){
     app.set('port', config.port)
     app.listen(app.get('port'), () => {
             console.log('Server app running!')
-            console.log(`  Listening on port ${this.app.get('port')}!\n   Visit http://localhost:${this.app.get('port')} to view locally!`)
+            console.log(`  Listening on port ${app.get('port')}!\n   Visit http://localhost:${app.get('port')} to view locally!`)
         })
 }
 
-module.exports = {get_express, setup_express, get_config: load_config, listen}
+module.exports = {get_express, get_config, listen}
 
 // class ServerBuilder{
 //     constructor(config_path=path.resolve(__dirname, '../server.config.json')) {
