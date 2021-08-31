@@ -1,0 +1,56 @@
+html {
+
+}
+
+h1, h2, h3, h4, h5 {
+    text-align: center;
+}
+
+textarea {
+    height: calc(1em * 9);
+}
+
+
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+button {
+
+}
+
+input, textarea {
+    -webkit-appearance: none;
+    appearance: inherit;
+    display: inherit;
+    font-size: inherit;
+
+    width: 84%;
+    padding: 2%;
+    border: 1px solid black;
+    margin: 5%;
+}
+
+label {
+    text-align: center;
+}
+
+button {
+    -webkit-appearance: none;
+    appearance: inherit;
+    display: inherit;
+    background: #6262ab;
+    width: 88%;
+    padding: 1%;
+    margin: 5%;
+    font-size: x-large;
+    color: white;
+    text-align: center;
+}
+
+#nav {
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+}
