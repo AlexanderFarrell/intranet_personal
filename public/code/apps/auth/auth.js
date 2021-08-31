@@ -5,6 +5,7 @@ import {PasswordInputBuilder, TextInputBuilder} from "../../ui/elements/input_bu
 import {ConsoleHtml} from "../../ui/elements/console_html.js";
 import {ButtonBuilder} from "../../ui/elements/button_builder.js";
 import {post} from "../../api/api_helper.js";
+import {clientEngine} from "../../core/client_engine.js";
 
 //CreateApp
 
@@ -69,6 +70,7 @@ class CreateAccountApp extends ClientApp {
                 })
                 .catch(err => {
                     console_l.Error("Cannot connect to server. Account not created.")
+                    console.log(err)
                 })
         })
             .withInnerHtml('Create')
@@ -126,11 +128,13 @@ class LoginApp extends ClientApp {
             .withInnerHtml('Back')
 
         let start_button = new ButtonBuilder(() => {
+            console.log("Here ")
             post('/auth/login', {
                 username: username_input.value,
                 password: password_input.value
             })
                 .then(response => {
+                    console.log("Got to this point")
                     if (response.ok) {
                         this.OnSuccess()
                     } else {
@@ -139,6 +143,7 @@ class LoginApp extends ClientApp {
                 })
                 .catch(err => {
                     console_l.Error("Cannot connect to server")
+                    console.log(err)
                 })
         })
             .withInnerHtml('Login')
@@ -187,6 +192,12 @@ class AuthApp extends ClientApp {
     }
 }
 
-export const Create = new CreateAccountApp()
-export const Login = new LoginApp()
-export const Auth = new AuthApp()
+export const Create = new CreateAccountApp(() => {
+    clientEngine.start_app('Home')
+})
+export const Login = new LoginApp(() => {
+    clientEngine.start_app('Home')
+})
+export const Auth = new AuthApp(() => {
+    clientEngine.start_app('Home')
+})

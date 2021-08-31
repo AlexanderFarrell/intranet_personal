@@ -1,0 +1,9 @@
+POST http://auth/login/
+Content-Type: application/json
+
+{
+  "username": "J",
+  "password": "hellfreeze"
+}
+
+###
