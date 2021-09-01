@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="e2118b84-60a3-49dd-bb1e-b769796fe4b3" name="Server - Raspberry Pi">
+        <fileTransfer rootFolder="/home/morphsight/Servers/intranet_personal" accessType="SFTP" host="192.168.1.86" port="22" sshConfigId="80f36ff4-ebbd-45ac-822c-717fa0ee32db" sshConfig="morphsight@192.168.1.86:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

@@ -23,21 +23,20 @@ declare
     item_id_out int;
 begin
     insert into item (account_id)
-        values
-        ((select id from accounts where username = username_in))
-        returning id into item_id_out;
-    insert into idea (title, content, item_id) VALUES
-    (title_in, content_in, item_id_out);
+    values ((select id from accounts where username = username_in))
+    returning id into item_id_out;
+    insert into idea (title, content, item_id)
+    VALUES (title_in, content_in, item_id_out);
 end;
 $$;
 
 select i.id, i.title, i.content, d.created_on
 from items_by_tag('this', 'Alex') d
-inner join idea i on i.item_id = d.item_id;
+         inner join idea i on i.item_id = d.item_id;
 
 
 select t.name
-from tags_by_item((select item_id from idea where id=1), 'Alex') t;
+from tags_by_item((select item_id from idea where id = 1), 'Alex') t;
 
 
 create or replace

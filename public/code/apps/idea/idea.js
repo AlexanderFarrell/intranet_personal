@@ -7,6 +7,7 @@ import {SearchBarBuilder} from "../../ui/elements/searchBarBuilder.js";
 import {ContentApp} from "../../content/content_app.js";
 import {ConsoleHtml} from "../../ui/elements/console_html.js";
 import {NavBuilder} from "../../ui/elements/nav_builder.js";
+import {client} from "../../core/client_engine.js";
 
 function RenderContent(){
     return new ElementBuilder()
@@ -39,6 +40,7 @@ export class IdeaApp extends ContentApp {
                         .withInnerHtml(content)
                 })
             .build())
+        client.Apps.get('Home').AddToMenu('Idea')
     }
 
     OnStart()  {
@@ -57,6 +59,7 @@ export class IdeaApp extends ContentApp {
             })
         this.ToolView = new ElementBuilder()
         this.Content = new ContainerItemBuilder()
+            .withCss('text-align', 'center')
         this.View = new ElementBuilder()
             .withChildBuilder(nav)
             .withChildBuilder(this.ToolView)
@@ -86,7 +89,10 @@ export class IdeaApp extends ContentApp {
             .withoutContents()
             .withChildBuilder(
                 new SearchBarBuilder(
-                    (search_str) => {this.OnSearch(search_str)})
+                    (search_str) => {
+                        this.Content.withInnerHtml('Loading...')
+                        this.OnSearch(search_str)
+                    })
             )
         this.Content.clear();
     }

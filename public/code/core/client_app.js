@@ -1,13 +1,13 @@
-import {clientEngine} from "./client_engine.js";
+import {client} from "./client_engine.js";
 
 export class ClientApp {
     constructor(name) {
         this.Name = name
-        clientEngine.add_app(this)
+        client.add_app(this)
     }
 
     get IsRunning() {
-        return clientEngine.ActiveApp === this
+        return client.ActiveApp === this
     }
 
     OnStart(){
@@ -20,9 +20,9 @@ export class ClientApp {
 
     Start(){
         if (!this.IsRunning){
-            clientEngine.start_app(this.Name)
+            client.start_app(this.Name)
         } else {
-            throw new Error(`Cannot start as the app is already running. Use the restart method if you'd like to reset the app. Current Running: ${clientEngine.ActiveApp.Name} Stack: ${clientEngine.AppStack}`)
+            throw new Error(`Cannot start as the app is already running. Use the restart method if you'd like to reset the app. Current Running: ${client.ActiveApp.Name} Stack: ${client.AppStack}`)
         }
     }
 
@@ -31,15 +31,15 @@ export class ClientApp {
             this.Stop()
             this.Start()
         } else {
-            throw new Error(`Cannot restart app. It is not running. Current running app: ${clientEngine.ActiveApp.Name}`)
+            throw new Error(`Cannot restart app. It is not running. Current running app: ${client.ActiveApp.Name}`)
         }
     }
 
     Stop(){
         if (this.IsRunning){
-            clientEngine.close_running_app()
+            client.close_running_app()
         } else {
-            throw new Error(`Cannot stop app as it is not running. Current running app: ${clientEngine.ActiveApp.Name}`)
+            throw new Error(`Cannot stop app as it is not running. Current running app: ${client.ActiveApp.Name}`)
         }
     }
 }

@@ -21,6 +21,12 @@ class ClientEngine {
         return app_switcher.Active;
     }
 
+    load_apps(...apps){
+        for (const app in apps){
+            this.Apps.set(app.Name, app)
+        }
+    }
+
     add_app(app){
         if (this.Apps.has(app.Name)){
             throw new Error("App already exists")
@@ -51,4 +57,4 @@ class ClientEngine {
     }
 }
 
-export const clientEngine = new ClientEngine()
+export const client = new ClientEngine()

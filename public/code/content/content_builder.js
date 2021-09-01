@@ -3,15 +3,8 @@ import {ElementBuilder} from "../ui/elements/element_builder.js";
 import {ButtonBuilder} from "../ui/elements/button_builder.js";
 import {ContentKind} from "./content_kind.js";
 
-export const content_kinds = new Map()
+export const content = new Map()
 
-export const content_engine = {
-    add: (name) => {
-        let kind = new ContentKind(name)
-        content_kinds.set(name, this)
-        return kind;
-    }
-}
 export class ContentBuilder {
     constructor(name) {
         this.Name = name.toLowerCase();
@@ -21,9 +14,6 @@ export class ContentBuilder {
     }
 
     withProperty(name, setter, viewFactory, editViewFactory){
-        // this.Setters[name] = setter;
-        // this.PropertyViews[name] = viewFactory;
-        // this.EditViews[name] = editViewFactory;
         this.Properties.set(name, {
             Setter: setter,
             CreateView: viewFactory,

@@ -3,7 +3,7 @@ const morgan_logging = require("morgan");
 const bodyParser = require("body-parser");
 const sessions = require("express-session");
 
-function has_body_vars(...body_params) {
+function require_body(...body_params) {
     return (req, res, next) => {
         body_params.forEach(p => {
             if (req.body[p] === undefined){
@@ -14,7 +14,7 @@ function has_body_vars(...body_params) {
     }
 }
 
-function must_be_logged_in(){
+function require_auth(){
     return (req, res, next) => {
         if (req.session.username === undefined){
             res.sendStatus(404)
@@ -40,4 +40,4 @@ function setup_express_middleware(app, config){
 
 }
 
-module.exports = {has_body_vars, must_be_logged_in, setup_express_middleware}
+module.exports = {require_body, require_login: require_auth, setup_express_middleware}

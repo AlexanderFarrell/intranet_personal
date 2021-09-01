@@ -1,4 +1,4 @@
-import {content_kinds} from "./content_builder.js";
+import {content} from "./content_builder.js";
 
 export class ContentKind {
     constructor(name, api, properties, viewFactory, formViewFactory) {
@@ -7,7 +7,7 @@ export class ContentKind {
         this.Properties = properties
         this.ViewFactory = viewFactory;
         this.FormViewFactory = formViewFactory;
-        content_kinds.set(name, this)
+        content.set(name, this)
     }
 
     GetView(item) {

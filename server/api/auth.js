@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt')
 const {Router} = require('express')
-const {has_body_vars} = require("../middleware/middleware_base");
+const {require_body, require_login} = require("../middleware/middleware_base");
 
 function has_logged_in(req, username){
     req.session.username = username
@@ -9,7 +9,7 @@ function has_logged_in(req, username){
 function get_auth_router(){
     let r = Router()
 
-    r.post('/create', [has_body_vars('username', 'password'), async (req, res) => {
+    r.post('/create', [require_body('username', 'password'), async (req, res) => {
         const username = req.body.username;
         const password = req.body.password;
 
@@ -30,7 +30,7 @@ function get_auth_router(){
         });
     }])
 
-    r.post('/login', [has_body_vars('username', 'password'), async (req, res) => {
+    r.post('/login', [require_body('username', 'password'), async (req, res) => {
         const username = req.body.username;
         const password = req.body.password;
 

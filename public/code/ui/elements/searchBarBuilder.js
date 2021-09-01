@@ -13,7 +13,9 @@ export class SearchBarBuilder extends ElementBuilder {
             .withChildBuilder(search_text)
         )
             .withChildBuilder(new ButtonBuilder(
-                onSearch(search_text.value)
+                () => {
+                    onSearch(search_text.value)
+                }
             )
                 .withInnerHtml('Search'))
         return this;
