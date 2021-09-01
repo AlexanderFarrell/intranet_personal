@@ -78,7 +78,7 @@ class CreateAccountApp extends ClientApp {
         ele.withChildBuilder(username_label)
             .withChildBuilder(password_label)
             .withChildBuilder(confirm_label)
-            .withChildElement(console_l.View)
+            .withChildBuilder(console_l.View)
             .withChildBuilder(new ElementBuilder()
                 .withRowFlexContainerCss()
                 .withChildBuilder(back_button)
@@ -108,6 +108,7 @@ class LoginApp extends ClientApp {
         let username_label = new ElementBuilder('label')
             .withInnerHtml('Username')
         let username_input = new TextInputBuilder('')
+            .withTabIndex(1)
             .build()
             username_label.withChildElement(username_input)
 
@@ -115,6 +116,7 @@ class LoginApp extends ClientApp {
         let password_label = new ElementBuilder('label')
             .withInnerHtml('Password')
         let password_input = new PasswordInputBuilder()
+            .withTabIndex(2)
             .build()
         password_label.withChildElement(password_input)
 
@@ -126,15 +128,14 @@ class LoginApp extends ClientApp {
             this.Stop()
         })
             .withInnerHtml('Back')
+            .withTabIndex(4)
 
         let start_button = new ButtonBuilder(() => {
-            console.log("Here ")
             post('/auth/login', {
                 username: username_input.value,
                 password: password_input.value
             })
                 .then(response => {
-                    console.log("Got to this point")
                     if (response.ok) {
                         this.OnSuccess()
                     } else {
@@ -147,10 +148,11 @@ class LoginApp extends ClientApp {
                 })
         })
             .withInnerHtml('Login')
+            .withTabIndex(3)
 
         ele.withChildBuilder(username_label)
             .withChildBuilder(password_label)
-            .withChildElement(console_l.View)
+            .withChildBuilder(console_l.View)
             .withChildBuilder(new ElementBuilder()
                 .withRowFlexContainerCss()
                 .withChildBuilder(back_button)

@@ -1,18 +1,21 @@
-import {ElementBuilder} from "./element_builder";
-import {TextInputBuilder} from "./input_builder";
-import {ButtonBuilder} from "./button_builder";
+import {ElementBuilder} from "./element_builder.js";
+import {TextInputBuilder} from "./input_builder.js";
+import {ButtonBuilder} from "./button_builder.js";
 
-class SearchBarBuilder extends ElementBuilder {
+export class SearchBarBuilder extends ElementBuilder {
     constructor(onSearch) {
         super();
-        let search_text = new TextInputBuilder();
+        this.withCss('display', 'grid')
+        this.withCss('grid-template-columns', '3fr 1fr')
+        let search_text = new TextInputBuilder('Search...');
         this.withChildBuilder(new ElementBuilder('label')
-            .withInnerHtml('Search')
+            ///.withInnerHtml('Search')
             .withChildBuilder(search_text)
         )
             .withChildBuilder(new ButtonBuilder(
                 onSearch(search_text.value)
             )
                 .withInnerHtml('Search'))
+        return this;
     }
 }

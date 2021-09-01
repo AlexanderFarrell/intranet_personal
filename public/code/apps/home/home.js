@@ -18,6 +18,7 @@ class HomeApp extends ClientApp {
         this.Menu.forEach(item => {
             ele.withChildBuilder(new ButtonBuilder(() => {
                 clientEngine.start_app(item[0])
+                console.log(`Running: ${clientEngine.ActiveApp.name} - Started: ${item[0]}`)
             })
                 .withInnerHtml(item[0]))
         })
@@ -28,8 +29,8 @@ class HomeApp extends ClientApp {
         )
     }
 
-    AddToMenu(app, name){
-        this.Menu.push([name, app])
+    AddToMenu(name){
+        this.Menu.push([name, clientEngine.get_app(name)])
     }
 }
 

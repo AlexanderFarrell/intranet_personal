@@ -5,16 +5,19 @@ import {BaseSwitcher} from "./base_switcher.js";
 
 export class ConsoleHtml {
     constructor(builder=new ElementBuilder().withInnerHtml('&nbsp;')) {
-        this.View = builder.build()
+        this.View = builder
         this._toggle = new BaseSwitcher(
             'ConsoleInfo',
             [],
             (klass) => {
-            this.View.classList.remove(klass)
+                if (klass !== undefined){
+                    this.View._element.classList.add(klass)
+                }
         }, (klass) => {
-            this.View.classList.add(klass)
+                if (klass !== undefined){
+                    this.View._element.classList.remove(klass)
+                }
         })
-
     }
 
     Info(text){

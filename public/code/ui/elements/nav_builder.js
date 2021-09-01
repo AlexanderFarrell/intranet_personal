@@ -1,7 +1,7 @@
 import {ElementBuilder} from "./element_builder.js";
 import {ButtonBuilder} from "./button_builder.js";
 
-class NavBuilder extends ElementBuilder {
+export class NavBuilder extends ElementBuilder {
     constructor() {
         super();
         this.withClass('Nav')

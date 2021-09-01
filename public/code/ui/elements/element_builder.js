@@ -23,6 +23,10 @@ export class ElementBuilder {
         this._element.innerHTML = innerHtml;
         return this;
     }
+    withoutContents(){
+        this._element.innerHTML = '';
+        return this;
+    }
     withAttribute(qualifiedName, value){
         this._element.setAttribute(qualifiedName, value);
         return this;

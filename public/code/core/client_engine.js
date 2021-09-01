@@ -25,7 +25,6 @@ class ClientEngine {
         if (this.Apps.has(app.Name)){
             throw new Error("App already exists")
         }
-
         this.Apps.set(app.Name, app)
     }
 
