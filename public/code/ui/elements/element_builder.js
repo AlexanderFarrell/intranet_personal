@@ -39,8 +39,20 @@ export class ElementBuilder {
         this._element.appendChild(element)
         return this;
     }
+    withManyChildElements(elements){
+        elements.forEach(e => {
+            this._element.appendChild(e)
+        })
+        return this;
+    }
     withChildBuilder(builder){
         this._element.appendChild(builder._element)
+        return this;
+    }
+    withManyChildBuilders(builders){
+        builders.forEach(b => {
+            this._element.appendChild(b._element)
+        })
         return this;
     }
     withCss(name, value){
